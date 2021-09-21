@@ -17,10 +17,12 @@
 import Foundation
 
 /// A protocol defining requirements for Message Authentication Codes
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public protocol MessageAuthenticationCode: Hashable, ContiguousBytes, CustomStringConvertible, Sequence where Element == UInt8 {
     var byteCount: Int { get }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension MessageAuthenticationCode {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return safeCompare(lhs, rhs)

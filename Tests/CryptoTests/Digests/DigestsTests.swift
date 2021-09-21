@@ -25,6 +25,7 @@ enum TestError: Error {
 	case unhandled
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 func nullTestVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> String {
     switch H.self {
 	case is Insecure.SHA1.Type: return "da39a3ee5e6b4b0d3255bfef95601890afd80709"
@@ -37,6 +38,7 @@ func nullTestVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws ->
 	}
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 func testVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> String {
 	switch H.self {
 	case is Insecure.SHA1.Type: return "a49b2446a02c645bf419f995b67091253a04a259"
@@ -49,6 +51,7 @@ func testVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> Str
 	}
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 class DigestsTests: XCTestCase {
     func assertHashFunctionWithVector<H: HashFunction>(hf: H.Type, data: Data, testVector: String, file: StaticString = (#file), line: UInt = #line) throws {
         var h = hf.init()
@@ -113,6 +116,7 @@ class DigestsTests: XCTestCase {
         try orFail { try testHashFunctionImplementsCoW(hf: SHA512.self) }
     }
     
+    @available(tvOS 13.2, iOS 13.2, watchOS 6.1, *)
     func testBlockSizes() {
         XCTAssertEqual(Insecure.MD5.blockByteCount, 64)
         XCTAssertEqual(Insecure.SHA1.blockByteCount, 64)

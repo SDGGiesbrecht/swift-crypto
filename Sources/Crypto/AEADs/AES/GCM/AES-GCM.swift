@@ -23,6 +23,7 @@ typealias AESGCMImpl = OpenSSLAESGCMImpl
 
 import Foundation
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension AES {
     /// AES in GCM mode with 128-bit tags.
     public enum GCM: Cipher {
@@ -84,6 +85,7 @@ extension AES {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension AES.GCM {
     public struct SealedBox: AEADSealedBox {
         private let combinedRepresentation: Data

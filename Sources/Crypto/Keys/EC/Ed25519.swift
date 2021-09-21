@@ -16,6 +16,7 @@
 #else
 import Foundation
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Curve25519 {
     /// Signing operations on Curve25519
     public enum Signing {

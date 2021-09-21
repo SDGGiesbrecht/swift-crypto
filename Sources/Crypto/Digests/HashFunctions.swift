@@ -23,6 +23,7 @@ typealias DigestImpl = OpenSSLDigestImpl
 import Foundation
 
 /// Declares methods on cryptographic hash functions.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public protocol HashFunction {
     /// The block size of the hash function. It is different from the output size that can be retrieved from Digest.byteCount.
     static var blockByteCount: Int { get }
@@ -46,6 +47,7 @@ public protocol HashFunction {
     func finalize() -> Digest
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension HashFunction {
     /// Computes a digest of the buffer.
     ///

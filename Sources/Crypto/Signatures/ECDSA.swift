@@ -34,6 +34,7 @@ protocol NISTSigning {
 
 // MARK: - P256 + Signing
 /// An ECDSA (Elliptic Curve Digital Signature Algorithm) Signature
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256.Signing {
     public struct ECDSASignature: ContiguousBytes, NISTECDSASignature {
         /// Returns the raw signature.
@@ -111,6 +112,7 @@ extension P256.Signing {
 extension P256.Signing: NISTSigning {}
 
 // MARK: - P256 + PrivateKey
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256.Signing.PrivateKey: DigestSigner {
     ///  Generates an ECDSA signature over the P256 elliptic curve.
     ///
@@ -126,6 +128,7 @@ extension P256.Signing.PrivateKey: DigestSigner {
     }
  }
 
+ @available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
  extension P256.Signing.PrivateKey: Signer {
     /// Generates an ECDSA signature over the P256 elliptic curve.
     /// SHA256 is used as the hash function.
@@ -137,6 +140,7 @@ extension P256.Signing.PrivateKey: DigestSigner {
         return try self.signature(for: SHA256.hash(data: data))
     }
  }
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256.Signing.PublicKey: DigestValidator {
     /// Verifies an ECDSA signature over the P256 elliptic curve.
     ///
@@ -153,6 +157,7 @@ extension P256.Signing.PublicKey: DigestValidator {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256.Signing.PublicKey: DataValidator {
     /// Verifies an ECDSA signature over the P256 elliptic curve.
     /// SHA256 is used as the hash function.
@@ -168,6 +173,7 @@ extension P256.Signing.PublicKey: DataValidator {
 
 // MARK: - P384 + Signing
 /// An ECDSA (Elliptic Curve Digital Signature Algorithm) Signature
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384.Signing {
     public struct ECDSASignature: ContiguousBytes, NISTECDSASignature {
         /// Returns the raw signature.
@@ -245,6 +251,7 @@ extension P384.Signing {
 extension P384.Signing: NISTSigning {}
 
 // MARK: - P384 + PrivateKey
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384.Signing.PrivateKey: DigestSigner {
     ///  Generates an ECDSA signature over the P384 elliptic curve.
     ///
@@ -260,6 +267,7 @@ extension P384.Signing.PrivateKey: DigestSigner {
     }
  }
 
+ @available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
  extension P384.Signing.PrivateKey: Signer {
     /// Generates an ECDSA signature over the P384 elliptic curve.
     /// SHA384 is used as the hash function.
@@ -271,6 +279,7 @@ extension P384.Signing.PrivateKey: DigestSigner {
         return try self.signature(for: SHA384.hash(data: data))
     }
  }
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384.Signing.PublicKey: DigestValidator {
     /// Verifies an ECDSA signature over the P384 elliptic curve.
     ///
@@ -287,6 +296,7 @@ extension P384.Signing.PublicKey: DigestValidator {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384.Signing.PublicKey: DataValidator {
     /// Verifies an ECDSA signature over the P384 elliptic curve.
     /// SHA384 is used as the hash function.
@@ -302,6 +312,7 @@ extension P384.Signing.PublicKey: DataValidator {
 
 // MARK: - P521 + Signing
 /// An ECDSA (Elliptic Curve Digital Signature Algorithm) Signature
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521.Signing {
     public struct ECDSASignature: ContiguousBytes, NISTECDSASignature {
         /// Returns the raw signature.
@@ -379,6 +390,7 @@ extension P521.Signing {
 extension P521.Signing: NISTSigning {}
 
 // MARK: - P521 + PrivateKey
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521.Signing.PrivateKey: DigestSigner {
     ///  Generates an ECDSA signature over the P521 elliptic curve.
     ///
@@ -394,6 +406,7 @@ extension P521.Signing.PrivateKey: DigestSigner {
     }
  }
 
+ @available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
  extension P521.Signing.PrivateKey: Signer {
     /// Generates an ECDSA signature over the P521 elliptic curve.
     /// SHA512 is used as the hash function.
@@ -405,6 +418,7 @@ extension P521.Signing.PrivateKey: DigestSigner {
         return try self.signature(for: SHA512.hash(data: data))
     }
  }
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521.Signing.PublicKey: DigestValidator {
     /// Verifies an ECDSA signature over the P521 elliptic curve.
     ///
@@ -421,6 +435,7 @@ extension P521.Signing.PublicKey: DigestValidator {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521.Signing.PublicKey: DataValidator {
     /// Verifies an ECDSA signature over the P521 elliptic curve.
     /// SHA512 is used as the hash function.

@@ -18,6 +18,7 @@ import Foundation
 
 /// Performs HMAC - Keyed-Hashing for Message Authentication
 /// Reference: https://tools.ietf.org/html/rfc2104
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct HMAC<H: HashFunction>: MACAlgorithm {
     public typealias Key = SymmetricKey
     public typealias MAC = HashedAuthenticationCode<H>
@@ -160,6 +161,7 @@ public struct HMAC<H: HashFunction>: MACAlgorithm {
 }
 
 /// A structure that contains a Message Authentication Code that was computed from a Hash Function using HMAC.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct HashedAuthenticationCode<H: HashFunction>: MessageAuthenticationCode {
     let digest: H.Digest
     

@@ -46,11 +46,14 @@ protocol NISTECPrivateKey: ECPrivateKey where PublicKey: NISTECPublicKey {
 }
 
 /// The NIST P-256 Elliptic Curve.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum P256 { }
 
 /// The NIST P-384 Elliptic Curve.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum P384 { }
 
 /// The NIST P-521 Elliptic Curve.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum P521 { }
 #endif // Linux or !SwiftPM

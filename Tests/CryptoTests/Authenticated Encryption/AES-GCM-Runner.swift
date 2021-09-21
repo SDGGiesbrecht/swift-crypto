@@ -40,6 +40,7 @@ struct AESGCMTestVector: Codable {
     let result: String
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 class AESGCMTests: XCTestCase {
     func testBadKeySize() {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!

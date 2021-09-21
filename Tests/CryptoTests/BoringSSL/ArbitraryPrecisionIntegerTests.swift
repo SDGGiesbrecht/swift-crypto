@@ -14,6 +14,7 @@
 @testable import Crypto
 import XCTest
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 final class ArbitraryPrecisionIntegerTests: XCTestCase {
     func testSimpleArithmetic() {
         let six = ArbitraryPrecisionInteger(6)

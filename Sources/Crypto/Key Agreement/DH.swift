@@ -31,6 +31,7 @@ protocol DiffieHellmanKeyAgreement {
 
 /// A Key Agreement Result
 /// A SharedSecret has to go through a Key Derivation Function before being able to use by a symmetric key operation.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SharedSecret: ContiguousBytes {
     var ss: SecureBytes
 
@@ -112,6 +113,7 @@ public struct SharedSecret: ContiguousBytes {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension SharedSecret: Hashable {
     public func hash(into hasher: inout Hasher) {
         ss.withUnsafeBytes { hasher.combine(bytes: $0) }
@@ -119,6 +121,7 @@ extension SharedSecret: Hashable {
 }
 
 // We want to implement constant-time comparison for digests.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension SharedSecret: CustomStringConvertible, Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return safeCompare(lhs, rhs)

@@ -24,6 +24,7 @@ typealias ChaChaPolyImpl = OpenSSLChaChaPolyImpl
 import Foundation
 
 /// ChaCha20-Poly1305 as described in RFC 7539 with 96-bit nonces.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum ChaChaPoly: Cipher {
     static let tagByteCount = 16
     static let keyBitsCount = 256
@@ -84,6 +85,7 @@ public enum ChaChaPoly: Cipher {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension ChaChaPoly {
     @frozen
     public struct SealedBox: AEADSealedBox {

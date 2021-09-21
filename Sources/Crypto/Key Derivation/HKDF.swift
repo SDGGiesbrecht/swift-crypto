@@ -18,6 +18,7 @@ import Foundation
 
 /// The HMAC-based Extract-and-Expand Key Derivation Function (IETF RFC 5869)
 /// https://tools.ietf.org/html/rfc5869
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct HKDF<H: HashFunction> {
     /// Derives a symmetric key using the HKDF algorithm.
     ///

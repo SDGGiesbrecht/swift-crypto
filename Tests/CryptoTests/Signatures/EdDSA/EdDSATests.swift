@@ -21,6 +21,7 @@ import CryptoKit
 import Crypto
 #endif
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 class EdDSATests: XCTestCase {
     func testExample() throws {
         let privateKey = Curve25519.Signing.PrivateKey()

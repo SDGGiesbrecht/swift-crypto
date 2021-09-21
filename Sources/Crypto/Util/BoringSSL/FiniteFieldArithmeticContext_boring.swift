@@ -25,6 +25,7 @@ import Foundation
 ///
 /// Annoyingly, because of the way we have implemented ArbitraryPrecisionInteger, we can't actually use these temporary bignums
 /// ourselves.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 @usableFromInline
 class FiniteFieldArithmeticContext {
     private var fieldSize: ArbitraryPrecisionInteger
@@ -48,6 +49,7 @@ class FiniteFieldArithmeticContext {
 
 // MARK: - Arithmetic operations
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension FiniteFieldArithmeticContext {
     @usableFromInline
     func square(_ input: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {

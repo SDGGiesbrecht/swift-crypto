@@ -15,5 +15,6 @@
 @_exported import CryptoKit
 #else
 /// The Curve25519 Elliptic Curve.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum Curve25519 {}
 #endif // Linux or !SwiftPM

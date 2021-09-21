@@ -14,6 +14,7 @@
 @_implementationOnly import CCryptoBoringSSL
 
 /// A wrapper around BoringSSL's EC_POINT with some lifetime management.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 @usableFromInline
 class EllipticCurvePoint {
     /* private but @usableFromInline */ @usableFromInline var _basePoint: OpaquePointer
@@ -52,6 +53,7 @@ class EllipticCurvePoint {
 
 // MARK: - Helpers
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension EllipticCurvePoint {
     @inlinable
     func withPointPointer<T>(_ body: (OpaquePointer) throws -> T) rethrows -> T {

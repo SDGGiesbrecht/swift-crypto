@@ -15,6 +15,7 @@
 
 /// A wrapper around BoringSSL's EC_GROUP object that handles reference counting and
 /// liveness.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 @usableFromInline
 class BoringSSLEllipticCurveGroup {
     /* private but usableFromInline */ @usableFromInline var _group: OpaquePointer
@@ -35,6 +36,7 @@ class BoringSSLEllipticCurveGroup {
 
 // MARK: - Helpers
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension BoringSSLEllipticCurveGroup {
     @usableFromInline
     var coordinateByteCount: Int {
@@ -86,6 +88,7 @@ extension BoringSSLEllipticCurveGroup {
 
 // MARK: - CurveName
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension BoringSSLEllipticCurveGroup {
     @usableFromInline
     enum CurveName {
@@ -95,6 +98,7 @@ extension BoringSSLEllipticCurveGroup {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension BoringSSLEllipticCurveGroup.CurveName {
     @usableFromInline
     var baseNID: CInt {

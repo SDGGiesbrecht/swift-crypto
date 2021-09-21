@@ -32,6 +32,7 @@ extension Curve25519.Signing {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Curve25519.Signing.PublicKey: DataValidator {
     typealias Signature = Data
     
@@ -50,6 +51,7 @@ extension Curve25519.Signing.PublicKey: DataValidator {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Curve25519.Signing.PrivateKey: Signer {
     /// Generates an EdDSA signature over Curve25519.
     ///

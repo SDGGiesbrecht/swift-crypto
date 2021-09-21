@@ -17,6 +17,7 @@
 import Foundation
 
 /// The size of a symmetric key
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SymmetricKeySize {
     public let bitCount: Int
 
@@ -46,6 +47,7 @@ public struct SymmetricKeySize {
 }
 
 /// A symmetric key for use with software implementations of cryptographic algorithms.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SymmetricKey: ContiguousBytes {
     let sb: SecureBytes
 
@@ -81,6 +83,7 @@ public struct SymmetricKey: ContiguousBytes {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension SymmetricKey: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return safeCompare(lhs, rhs)

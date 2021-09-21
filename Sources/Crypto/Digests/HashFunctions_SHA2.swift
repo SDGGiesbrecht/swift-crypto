@@ -15,6 +15,7 @@
 @_exported import CryptoKit
 #else
 /// The SHA-256 Hash Function
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA256: HashFunctionImplementationDetails {
     public static var blockByteCount: Int {
         get { return 64 }
@@ -51,6 +52,7 @@ public struct SHA256: HashFunctionImplementationDetails {
 }
 
 /// The SHA-384 Hash Function
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA384: HashFunctionImplementationDetails {
     public static var blockByteCount: Int {
         get { return 128 }
@@ -83,6 +85,7 @@ public struct SHA384: HashFunctionImplementationDetails {
 }
 
 /// The SHA-512 Hash Function
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA512: HashFunctionImplementationDetails {
     public static var blockByteCount: Int {
         get { return 128 }

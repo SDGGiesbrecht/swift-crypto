@@ -16,6 +16,7 @@
 #else
 import Foundation
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Curve25519 {
     public enum KeyAgreement {
         #if (os(macOS) || os(iOS) || os(watchOS) || os(tvOS)) && !CRYPTO_IN_SWIFTPM_FORCE_BUILD_API

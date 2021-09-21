@@ -74,6 +74,7 @@ extension SecureBytes {
 }
 
 // MARK: - Equatable conformance, constant-time
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension SecureBytes: Equatable {
     public static func == (lhs: SecureBytes, rhs: SecureBytes) -> Bool {
         return safeCompare(lhs, rhs)

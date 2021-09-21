@@ -14,6 +14,7 @@
 #if (os(macOS) || os(iOS) || os(watchOS) || os(tvOS)) && CRYPTO_IN_SWIFTPM && !CRYPTO_IN_SWIFTPM_FORCE_BUILD_API
 @_exported import CryptoKit
 #else
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Insecure {
     /// The SHA-1 Hash Function.
     /// ⚠️ Security Recommendation: The SHA-1 hash function is no longer considered secure. We strongly recommend using the SHA-256 hash function instead.

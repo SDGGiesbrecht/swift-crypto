@@ -16,5 +16,6 @@
 #else
 /// Algorithms that we support for legacy reasons but that are insecure to use.
 /// Do not adopt in new protocols.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum Insecure {}
 #endif // Linux or !SwiftPM

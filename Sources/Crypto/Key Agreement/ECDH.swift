@@ -29,6 +29,7 @@ import Foundation
 // see section `gyb` in `README` for details.
 
 // MARK: - P256 + Signing
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256 {
     public enum Signing {
     
@@ -157,6 +158,7 @@ extension P256 {
     }
 }
 // MARK: - P256 + KeyAgreement
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256 {
     public enum KeyAgreement {
     
@@ -285,6 +287,7 @@ extension P256 {
     }
 }
 // MARK: - P384 + Signing
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384 {
     public enum Signing {
     
@@ -413,6 +416,7 @@ extension P384 {
     }
 }
 // MARK: - P384 + KeyAgreement
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384 {
     public enum KeyAgreement {
     
@@ -541,6 +545,7 @@ extension P384 {
     }
 }
 // MARK: - P521 + Signing
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521 {
     public enum Signing {
     
@@ -669,6 +674,7 @@ extension P521 {
     }
 }
 // MARK: - P521 + KeyAgreement
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521 {
     public enum KeyAgreement {
     
@@ -798,6 +804,7 @@ extension P521 {
 }
 
 // MARK: - P256 + DH
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P256.KeyAgreement.PrivateKey: DiffieHellmanKeyAgreement {
     /// Performs a key agreement with provided public key share.
     ///
@@ -813,6 +820,7 @@ extension P256.KeyAgreement.PrivateKey: DiffieHellmanKeyAgreement {
     }
 }
 // MARK: - P384 + DH
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P384.KeyAgreement.PrivateKey: DiffieHellmanKeyAgreement {
     /// Performs a key agreement with provided public key share.
     ///
@@ -828,6 +836,7 @@ extension P384.KeyAgreement.PrivateKey: DiffieHellmanKeyAgreement {
     }
 }
 // MARK: - P521 + DH
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension P521.KeyAgreement.PrivateKey: DiffieHellmanKeyAgreement {
     /// Performs a key agreement with provided public key share.
     ///

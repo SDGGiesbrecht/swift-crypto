@@ -19,6 +19,7 @@
 // see section `gyb` in `README` for details.
 
 // MARK: - SHA256Digest + DigestPrivate
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA256Digest: DigestPrivate {
     let bytes: (UInt64, UInt64, UInt64, UInt64)
     
@@ -66,6 +67,7 @@ public struct SHA256Digest: DigestPrivate {
 
 
 // MARK: - SHA384Digest + DigestPrivate
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA384Digest: DigestPrivate {
     let bytes: (UInt64, UInt64, UInt64, UInt64, UInt64, UInt64)
     
@@ -115,6 +117,7 @@ public struct SHA384Digest: DigestPrivate {
 
 
 // MARK: - SHA512Digest + DigestPrivate
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public struct SHA512Digest: DigestPrivate {
     let bytes: (UInt64, UInt64, UInt64, UInt64, UInt64, UInt64, UInt64, UInt64)
     
@@ -164,6 +167,7 @@ public struct SHA512Digest: DigestPrivate {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Insecure{
 // MARK: - SHA1Digest + DigestPrivate
 public struct SHA1Digest: DigestPrivate {
@@ -210,6 +214,7 @@ public struct SHA1Digest: DigestPrivate {
     }
 }
 }
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Insecure{
 // MARK: - MD5Digest + DigestPrivate
 public struct MD5Digest: DigestPrivate {

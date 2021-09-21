@@ -20,6 +20,7 @@ import Foundation
 // see section `gyb` in `README` for details.
 
 // MARK: - AES.GCM + Nonce
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension AES.GCM {
     public struct Nonce: ContiguousBytes, Sequence {
         let bytes: Data
@@ -50,6 +51,7 @@ extension AES.GCM {
 }
 
 // MARK: - ChaChaPoly + Nonce
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension ChaChaPoly {
     public struct Nonce: ContiguousBytes, Sequence {
         let bytes: Data

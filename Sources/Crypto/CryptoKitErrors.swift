@@ -19,6 +19,7 @@
 /// - incorrectParameterSize: The number of bytes passed for a given argument is incorrect.
 /// - authenticationFailure: The authentication tag or signature is incorrect.
 /// - underlyingCoreCryptoError: An unexpected error at a lower-level occured.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum CryptoKitError: Error {
     case incorrectKeySize
     case incorrectParameterSize
@@ -27,6 +28,7 @@ public enum CryptoKitError: Error {
 }
 
 /// Errors encountered when parsing ASN.1 formatted keys.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum CryptoKitASN1Error: Error {
     /// The ASN.1 tag for this field is invalid or unsupported.
     case invalidFieldIdentifier

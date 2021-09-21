@@ -15,6 +15,7 @@
 @_exported import CryptoKit
 #else
 /// The Advanced Encryption Standard (AES)
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public enum AES {
     static let blockSizeByteCount = 16
 }

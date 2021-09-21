@@ -22,6 +22,7 @@ import CryptoKit
 import Crypto
 #endif
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 class ChaChaPolyTests: XCTestCase {
     func testIncorrectKeySize() throws {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!

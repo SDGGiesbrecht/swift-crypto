@@ -17,6 +17,7 @@
 import Foundation
 
 /// A protocol defining requirements for digests
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 public protocol Digest: Hashable, ContiguousBytes, CustomStringConvertible, Sequence where Element == UInt8 {
     static var byteCount: Int { get }
 }
@@ -40,6 +41,7 @@ extension DigestPrivate {
     }
 }
 
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Digest {
     public func makeIterator() -> Array<UInt8>.Iterator {
         self.withUnsafeBytes({ (buffPtr) in
@@ -49,6 +51,7 @@ extension Digest {
 }
 
 // We want to implement constant-time comparison for digests.
+@available(macOS 10.15, *, tvOS 13, iOS 13, watchOS 6, *)
 extension Digest {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         return safeCompare(lhs, rhs)
