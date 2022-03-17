@@ -294,7 +294,7 @@ int RSA_public_encrypt(size_t flen, const uint8_t *from, uint8_t *to, RSA *rsa,
     OPENSSL_PUT_ERROR(RSA, ERR_R_OVERFLOW);
     return -1;
   }
-  return out_len;
+  return (int)out_len;
 }
 
 int RSA_sign_raw(RSA *rsa, size_t *out_len, uint8_t *out, size_t max_out,
@@ -318,7 +318,7 @@ int RSA_private_encrypt(size_t flen, const uint8_t *from, uint8_t *to, RSA *rsa,
     OPENSSL_PUT_ERROR(RSA, ERR_R_OVERFLOW);
     return -1;
   }
-  return out_len;
+  return (int)out_len;
 }
 
 int RSA_decrypt(RSA *rsa, size_t *out_len, uint8_t *out, size_t max_out,
@@ -342,7 +342,7 @@ int RSA_private_decrypt(size_t flen, const uint8_t *from, uint8_t *to, RSA *rsa,
     OPENSSL_PUT_ERROR(RSA, ERR_R_OVERFLOW);
     return -1;
   }
-  return out_len;
+  return (int)out_len;
 }
 
 int RSA_public_decrypt(size_t flen, const uint8_t *from, uint8_t *to, RSA *rsa,
@@ -357,15 +357,15 @@ int RSA_public_decrypt(size_t flen, const uint8_t *from, uint8_t *to, RSA *rsa,
     OPENSSL_PUT_ERROR(RSA, ERR_R_OVERFLOW);
     return -1;
   }
-  return out_len;
+  return (int)out_len;
 }
 
 unsigned RSA_size(const RSA *rsa) {
   if (rsa->meth->size) {
-    return rsa->meth->size(rsa);
+    return (unsigned int)rsa->meth->size(rsa);
   }
 
-  return rsa_default_size(rsa);
+  return (unsigned int)rsa_default_size(rsa);
 }
 
 int RSA_is_opaque(const RSA *rsa) {
@@ -491,7 +491,7 @@ int RSA_add_pkcs1_prefix(uint8_t **out_msg, size_t *out_msg_len,
     unsigned signed_msg_len;
     uint8_t *signed_msg;
 
-    signed_msg_len = prefix_len + msg_len;
+    signed_msg_len = (unsigned int)(prefix_len + msg_len);
     if (signed_msg_len < prefix_len) {
       OPENSSL_PUT_ERROR(RSA, RSA_R_TOO_LONG);
       return 0;
@@ -537,7 +537,7 @@ int RSA_sign(int hash_nid, const uint8_t *in, unsigned in_len, uint8_t *out,
     goto err;
   }
 
-  *out_len = size_t_out_len;
+  *out_len = (unsigned int)size_t_out_len;
   ret = 1;
 
 err:

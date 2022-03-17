@@ -13,6 +13,7 @@
 //===----------------------------------------------------------------------===//
 @_implementationOnly import CCryptoBoringSSL
 
+@available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
 extension CryptoKitError {
     /// A helper function that packs the value of `ERR_get_error` into the internal error field.
     @usableFromInline

@@ -123,7 +123,7 @@ int X509_CRL_sort(X509_CRL *c)
     sk_X509_REVOKED_sort(c->crl->revoked);
     for (i = 0; i < sk_X509_REVOKED_num(c->crl->revoked); i++) {
         r = sk_X509_REVOKED_value(c->crl->revoked, i);
-        r->sequence = i;
+        r->sequence = (int)i;
     }
     c->crl->enc.modified = 1;
     return 1;

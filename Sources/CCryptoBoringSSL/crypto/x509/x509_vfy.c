@@ -253,7 +253,7 @@ int X509_verify_cert(X509_STORE_CTX *ctx)
         }
     }
 
-    num = sk_X509_num(ctx->chain);
+    num = (int)sk_X509_num(ctx->chain);
     x = sk_X509_value(ctx->chain, num - 1);
     depth = param->depth;
 
@@ -329,7 +329,7 @@ int X509_verify_cert(X509_STORE_CTX *ctx)
         /*
          * Examine last certificate in chain and see if it is self signed.
          */
-        i = sk_X509_num(ctx->chain);
+        i = (int)sk_X509_num(ctx->chain);
         x = sk_X509_value(ctx->chain, i - 1);
 
         int is_self_signed;
@@ -448,7 +448,7 @@ int X509_verify_cert(X509_STORE_CTX *ctx)
                         X509_free(xtmp);
                         num--;
                     }
-                    ctx->last_untrusted = sk_X509_num(ctx->chain);
+                    ctx->last_untrusted = (int)sk_X509_num(ctx->chain);
                     retry = 1;
                     break;
                 }
@@ -761,7 +761,7 @@ static int check_name_constraints(X509_STORE_CTX *ctx)
     int i, j, rv;
     int has_name_constraints = 0;
     /* Check name constraints for all certificates */
-    for (i = sk_X509_num(ctx->chain) - 1; i >= 0; i--) {
+    for (i = (int)(sk_X509_num(ctx->chain) - 1); i >= 0; i--) {
         X509 *x = sk_X509_value(ctx->chain, i);
         /* Ignore self issued certs unless last in chain */
         if (i && (x->ex_flags & EXFLAG_SI))
@@ -772,7 +772,7 @@ static int check_name_constraints(X509_STORE_CTX *ctx)
          * but if it includes constraints it is to be assumed it expects them
          * to be obeyed.
          */
-        for (j = sk_X509_num(ctx->chain) - 1; j > i; j--) {
+        for (j = (int)(sk_X509_num(ctx->chain) - 1); j > i; j--) {
             NAME_CONSTRAINTS *nc = sk_X509_value(ctx->chain, j)->nc;
             if (nc) {
                 has_name_constraints = 1;
@@ -897,7 +897,7 @@ static int check_trust(X509_STORE_CTX *ctx)
          * overridden.
          */
         if (ok == X509_TRUST_REJECTED) {
-            ctx->error_depth = i;
+            ctx->error_depth = (int)i;
             ctx->current_cert = x;
             ctx->error = X509_V_ERR_CERT_REJECTED;
             ok = cb(0, ctx);
@@ -936,7 +936,7 @@ static int check_revocation(X509_STORE_CTX *ctx)
     if (!(ctx->param->flags & X509_V_FLAG_CRL_CHECK))
         return 1;
     if (ctx->param->flags & X509_V_FLAG_CRL_CHECK_ALL)
-        last = sk_X509_num(ctx->chain) - 1;
+        last = (int)(sk_X509_num(ctx->chain) - 1);
     else {
         /* If checking CRL paths this isn't the EE certificate */
         if (ctx->parent)
@@ -1593,7 +1593,7 @@ static int check_crl(X509_STORE_CTX *ctx, X509_CRL *crl)
     EVP_PKEY *ikey = NULL;
     int ok = 0, chnum, cnum;
     cnum = ctx->error_depth;
-    chnum = sk_X509_num(ctx->chain) - 1;
+    chnum = (int)(sk_X509_num(ctx->chain) - 1);
     /* if we have an alternative CRL issuer cert use that */
     if (ctx->current_issuer)
         issuer = ctx->current_issuer;
@@ -1734,7 +1734,7 @@ static int check_policy(X509_STORE_CTX *ctx)
     if (ctx->parent)
         return 1;
     ret = X509_policy_check(&ctx->tree, &ctx->explicit_policy, ctx->chain,
-                            ctx->param->policies, ctx->param->flags);
+                            ctx->param->policies, (int)ctx->param->flags);
     if (ret == 0) {
         OPENSSL_PUT_ERROR(X509, ERR_R_MALLOC_FAILURE);
         ctx->error = X509_V_ERR_OUT_OF_MEM;
@@ -1831,7 +1831,7 @@ static int internal_verify(X509_STORE_CTX *ctx)
 
     cb = ctx->verify_cb;
 
-    n = sk_X509_num(ctx->chain);
+    n = (int)sk_X509_num(ctx->chain);
     ctx->error_depth = n - 1;
     n--;
     xi = sk_X509_value(ctx->chain, n);

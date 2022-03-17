@@ -66,7 +66,7 @@ int X509v3_get_ext_count(const STACK_OF(X509_EXTENSION) *x)
 {
     if (x == NULL)
         return (0);
-    return (sk_X509_EXTENSION_num(x));
+    return (int)(sk_X509_EXTENSION_num(x));
 }
 
 int X509v3_get_ext_by_NID(const STACK_OF(X509_EXTENSION) *x, int nid,
@@ -91,7 +91,7 @@ int X509v3_get_ext_by_OBJ(const STACK_OF(X509_EXTENSION) *sk,
     lastpos++;
     if (lastpos < 0)
         lastpos = 0;
-    n = sk_X509_EXTENSION_num(sk);
+    n = (int)sk_X509_EXTENSION_num(sk);
     for (; lastpos < n; lastpos++) {
         ex = sk_X509_EXTENSION_value(sk, lastpos);
         if (OBJ_cmp(ex->object, obj) == 0)
@@ -111,7 +111,7 @@ int X509v3_get_ext_by_critical(const STACK_OF(X509_EXTENSION) *sk, int crit,
     lastpos++;
     if (lastpos < 0)
         lastpos = 0;
-    n = sk_X509_EXTENSION_num(sk);
+    n = (int)sk_X509_EXTENSION_num(sk);
     for (; lastpos < n; lastpos++) {
         ex = sk_X509_EXTENSION_value(sk, lastpos);
         if (((ex->critical > 0) && crit) || ((ex->critical <= 0) && !crit))
@@ -156,7 +156,7 @@ STACK_OF(X509_EXTENSION) *X509v3_add_ext(STACK_OF(X509_EXTENSION) **x,
     } else
         sk = *x;
 
-    n = sk_X509_EXTENSION_num(sk);
+    n = (int)sk_X509_EXTENSION_num(sk);
     if (loc > n)
         loc = n;
     else if (loc < 0)

@@ -25,6 +25,7 @@ enum TestError: Error {
 	case unhandled
 }
 
+@available(tvOS 13, iOS 13.0, *)
 func nullTestVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> String {
     switch H.self {
 	case is Insecure.SHA1.Type: return "da39a3ee5e6b4b0d3255bfef95601890afd80709"
@@ -37,6 +38,7 @@ func nullTestVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws ->
 	}
 }
 
+@available(tvOS 13, iOS 13, *)
 func testVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> String {
 	switch H.self {
 	case is Insecure.SHA1.Type: return "a49b2446a02c645bf419f995b67091253a04a259"
@@ -50,6 +52,7 @@ func testVectorForAlgorithm<H: HashFunction>(hashFunction: H.Type) throws -> Str
 }
 
 class DigestsTests: XCTestCase {
+    @available(tvOS 13, iOS 13, *)
     func assertHashFunctionWithVector<H: HashFunction>(hf: H.Type, data: Data, testVector: String, file: StaticString = (#file), line: UInt = #line) throws {
         var h = hf.init()
         h.update(data: data)
@@ -66,6 +69,7 @@ class DigestsTests: XCTestCase {
         XCTAssertFalse(result == DispatchData.empty, file: file, line: line)
     }
     
+    @available(tvOS 13, iOS 13, *)
     func testMD5() throws {
         XCTAssertEqual(Data(Insecure.MD5.hash(data: Data())).count, Insecure.MD5.byteCount)
         XCTAssertEqual(
@@ -78,19 +82,22 @@ class DigestsTests: XCTestCase {
         )
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testHashFunction<H: HashFunction>(hf: H.Type) throws {
         let data = ("abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu".data(using: String.Encoding.ascii)!)
         try orFail { try assertHashFunctionWithVector(hf: hf, data: data, testVector: try testVectorForAlgorithm(hashFunction: hf)) }
         try orFail { try assertHashFunctionWithVector(hf: hf, data: Data(repeating: 0, count: 0), testVector: try nullTestVectorForAlgorithm(hashFunction: hf)) }
 	}
 
-	func testHashFunctions() throws {
+    @available(tvOS 13, iOS 13, *)
+    func testHashFunctions() throws {
         try orFail { try testHashFunction(hf: Insecure.SHA1.self) }
         try orFail { try testHashFunction(hf: SHA256.self) }
         try orFail { try testHashFunction(hf: SHA384.self) }
         try orFail { try testHashFunction(hf: SHA512.self) }
 	}
 
+    @available(tvOS 13, iOS 13, *)
     func testHashFunctionImplementsCoW<H: HashFunction>(hf: H.Type) throws {
         var hf = H()
         hf.update(data: [1, 2, 3, 4])
@@ -105,6 +112,7 @@ class DigestsTests: XCTestCase {
         XCTAssertEqual(digest, copyDigest)
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testHashFunctionsImplementCow() throws {
         try orFail { try testHashFunctionImplementsCoW(hf: Insecure.MD5.self) }
         try orFail { try testHashFunctionImplementsCoW(hf: Insecure.SHA1.self) }
@@ -113,6 +121,7 @@ class DigestsTests: XCTestCase {
         try orFail { try testHashFunctionImplementsCoW(hf: SHA512.self) }
     }
     
+    @available(tvOS 13.2, iOS 13.2, *)
     func testBlockSizes() {
         XCTAssertEqual(Insecure.MD5.blockByteCount, 64)
         XCTAssertEqual(Insecure.SHA1.blockByteCount, 64)

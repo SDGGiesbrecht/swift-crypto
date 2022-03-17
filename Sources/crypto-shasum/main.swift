@@ -40,6 +40,7 @@ enum SupportedHashFunction {
         }
     }
 
+    @available(macOS 10.15, *)
     func hashLoop(from input: FileHandle) -> Data {
         switch self {
         case .sha256:
@@ -53,6 +54,7 @@ enum SupportedHashFunction {
 
     private static let readSize = 8192
 
+    @available(macOS 10.15, *)
     private static func hashLoop<HF: HashFunction>(from input: FileHandle, with hasher: HF.Type) -> HF.Digest {
         var hasher = HF()
 
@@ -89,6 +91,7 @@ extension String {
 }
 
 
+@available(macOS 10.15, *)
 func processInputs(_ handles: [String: FileHandle], algorithm: SupportedHashFunction) {
     for (name, fh) in handles {
         let result = algorithm.hashLoop(from: fh)
@@ -96,6 +99,7 @@ func processInputs(_ handles: [String: FileHandle], algorithm: SupportedHashFunc
     }
 }
 
+@available(macOS 10.15, *)
 func main() {
     var arguments = CommandLine.arguments.dropFirst()
     var algorithm = SupportedHashFunction.sha256  // Default to sha256
@@ -147,4 +151,8 @@ func main() {
 }
 
 
-main()
+if #available(macOS 10.15, *) {
+    main()
+} else {
+    fatalError("macOS 10.15 is required.")
+}

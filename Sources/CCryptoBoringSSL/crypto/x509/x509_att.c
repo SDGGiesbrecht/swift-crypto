@@ -64,7 +64,7 @@
 
 int X509at_get_attr_count(const STACK_OF(X509_ATTRIBUTE) *x)
 {
-    return sk_X509_ATTRIBUTE_num(x);
+    return (int)sk_X509_ATTRIBUTE_num(x);
 }
 
 int X509at_get_attr_by_NID(const STACK_OF(X509_ATTRIBUTE) *x, int nid,
@@ -89,7 +89,7 @@ int X509at_get_attr_by_OBJ(const STACK_OF(X509_ATTRIBUTE) *sk,
     lastpos++;
     if (lastpos < 0)
         lastpos = 0;
-    n = sk_X509_ATTRIBUTE_num(sk);
+    n = (int)sk_X509_ATTRIBUTE_num(sk);
     for (; lastpos < n; lastpos++) {
         ex = sk_X509_ATTRIBUTE_value(sk, lastpos);
         if (OBJ_cmp(ex->object, obj) == 0)
@@ -341,7 +341,7 @@ int X509_ATTRIBUTE_set1_data(X509_ATTRIBUTE *attr, int attrtype,
 int X509_ATTRIBUTE_count(X509_ATTRIBUTE *attr)
 {
     if (!attr->single)
-        return sk_ASN1_TYPE_num(attr->value.set);
+        return (int)sk_ASN1_TYPE_num(attr->value.set);
     if (attr->value.single)
         return 1;
     return 0;

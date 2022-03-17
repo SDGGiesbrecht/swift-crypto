@@ -41,6 +41,7 @@ struct AESGCMTestVector: Codable {
 }
 
 class AESGCMTests: XCTestCase {
+    @available(tvOS 13, iOS 13, *)
     func testBadKeySize() {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!
         let key = SymmetricKey(size: .init(bitCount: 304))
@@ -49,6 +50,7 @@ class AESGCMTests: XCTestCase {
         XCTAssertThrowsError(try AES.GCM.seal(plaintext, using: key, nonce: nonce))
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testNonStandardNonceSizeCombinedRepresentation() throws {
         let ciphertext = Array("This is some weird ciphertext".utf8)
         let tag = Array(repeating: UInt8(0), count: 16)
@@ -60,6 +62,7 @@ class AESGCMTests: XCTestCase {
         XCTAssertNil(try AES.GCM.SealedBox(nonce: longNonce, ciphertext: ciphertext, tag: tag).combined)
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testEncryptDecrypt() throws {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!
 
@@ -74,6 +77,7 @@ class AESGCMTests: XCTestCase {
         XCTAssertEqual(recoveredPlaintextWithoutAAD, plaintext)
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testExtractingBytesFromNonce() throws {
         let nonce = AES.GCM.Nonce()
         XCTAssertEqual(Array(nonce), nonce.withUnsafeBytes { Array($0) })
@@ -94,6 +98,7 @@ class AESGCMTests: XCTestCase {
         }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testUserConstructedSealedBoxesCombined() throws {
         let ciphertext = Array("This pretty clearly isn't ciphertext, but sure why not".utf8)
         let (contiguousCiphertext, discontiguousCiphertext) = ciphertext.asDataProtocols()
@@ -114,6 +119,7 @@ class AESGCMTests: XCTestCase {
         }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testUserConstructedSealedBoxesSplit() throws {
         let tag = Array(repeating: UInt8(0), count: 16)
         let ciphertext = Array("This pretty clearly isn't ciphertext, but sure why not".utf8)
@@ -147,6 +153,7 @@ class AESGCMTests: XCTestCase {
         XCTAssertEqual(weirdBox.ciphertext, Data())
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testRoundTripDataProtocols() throws {
         func roundTrip<Message: DataProtocol, AAD: DataProtocol>(message: Message, aad: AAD, file: StaticString = (#file), line: UInt = #line) throws {
             let key = SymmetricKey(size: .bits256)
@@ -168,6 +175,7 @@ class AESGCMTests: XCTestCase {
         _ = try orFail { try roundTrip(message: discontiguousMessage, aad: discontiguousAad) }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testWycheproof() throws {
         try orFail {
             try wycheproofTest(

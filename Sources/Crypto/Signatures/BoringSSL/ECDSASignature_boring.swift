@@ -19,6 +19,7 @@ import Foundation
 class ECDSASignature {
     private var _baseSig: UnsafeMutablePointer<ECDSA_SIG>
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     init<ContiguousBuffer: ContiguousBytes>(contiguousDERBytes derBytes: ContiguousBuffer) throws {
         self._baseSig = try derBytes.withUnsafeBytes { bytesPtr in
             guard let sig = CCryptoBoringSSLShims_ECDSA_SIG_from_bytes(bytesPtr.baseAddress, bytesPtr.count) else {
@@ -28,6 +29,7 @@ class ECDSASignature {
         }
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     init(rawRepresentation: Data) throws {
         let half = rawRepresentation.count / 2
@@ -72,6 +74,7 @@ class ECDSASignature {
         CCryptoBoringSSL_ECDSA_SIG_free(self._baseSig)
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     var components: (r: ArbitraryPrecisionInteger, s: ArbitraryPrecisionInteger) {
         var rPtr: UnsafePointer<BIGNUM>?

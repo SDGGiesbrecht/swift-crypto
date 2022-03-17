@@ -19,6 +19,7 @@
 class BoringSSLEllipticCurveGroup {
     /* private but usableFromInline */ @usableFromInline var _group: OpaquePointer
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     init(_ curve: CurveName) throws {
         guard let group = CCryptoBoringSSL_EC_GROUP_new_by_curve_name(curve.baseNID) else {
@@ -41,6 +42,7 @@ extension BoringSSLEllipticCurveGroup {
         return (Int(CCryptoBoringSSL_EC_GROUP_get_degree(self._group)) + 7) / 8
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func makeUnsafeOwnedECKey() throws -> OpaquePointer {
         guard let key = CCryptoBoringSSL_EC_KEY_new(),
@@ -56,6 +58,7 @@ extension BoringSSLEllipticCurveGroup {
         return try body(self._group)
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     var order: ArbitraryPrecisionInteger {
         // Groups must have an order.
@@ -65,6 +68,7 @@ extension BoringSSLEllipticCurveGroup {
 
     /// An elliptic curve can be represented in a Weierstrass form: `y² = x³ + ax + b`. This
     /// property provides the values of a and b on the curve.
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     var weierstrassCoefficients: (field: ArbitraryPrecisionInteger, a: ArbitraryPrecisionInteger, b: ArbitraryPrecisionInteger) {
         var field = ArbitraryPrecisionInteger()

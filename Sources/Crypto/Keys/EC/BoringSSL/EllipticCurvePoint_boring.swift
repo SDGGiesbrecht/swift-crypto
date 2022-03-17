@@ -18,6 +18,7 @@
 class EllipticCurvePoint {
     /* private but @usableFromInline */ @usableFromInline var _basePoint: OpaquePointer
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     init(multiplying scalar: ArbitraryPrecisionInteger, on group: BoringSSLEllipticCurveGroup) throws {
         self._basePoint = try group.withUnsafeGroupPointer { groupPtr in
@@ -36,6 +37,7 @@ class EllipticCurvePoint {
         }
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     init(copying pointer: OpaquePointer, on group: BoringSSLEllipticCurveGroup) throws {
         self._basePoint = try group.withUnsafeGroupPointer { groupPtr in
             guard let basePoint = CCryptoBoringSSL_EC_POINT_dup(pointer, groupPtr) else {
@@ -58,6 +60,7 @@ extension EllipticCurvePoint {
         return try body(self._basePoint)
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func affineCoordinates(group: BoringSSLEllipticCurveGroup) throws -> (x: ArbitraryPrecisionInteger, y: ArbitraryPrecisionInteger) {
         var x = ArbitraryPrecisionInteger()

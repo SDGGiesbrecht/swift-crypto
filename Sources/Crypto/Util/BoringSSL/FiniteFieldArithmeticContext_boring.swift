@@ -30,6 +30,7 @@ class FiniteFieldArithmeticContext {
     private var fieldSize: ArbitraryPrecisionInteger
     private var bnCtx: OpaquePointer
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     init(fieldSize: ArbitraryPrecisionInteger) throws {
         self.fieldSize = fieldSize
@@ -49,6 +50,7 @@ class FiniteFieldArithmeticContext {
 // MARK: - Arithmetic operations
 
 extension FiniteFieldArithmeticContext {
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func square(_ input: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {
         var output = ArbitraryPrecisionInteger()
@@ -68,6 +70,7 @@ extension FiniteFieldArithmeticContext {
         return output
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func multiply(_ x: ArbitraryPrecisionInteger, _ y: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {
         var output = ArbitraryPrecisionInteger()
@@ -89,6 +92,7 @@ extension FiniteFieldArithmeticContext {
         return output
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func add(_ x: ArbitraryPrecisionInteger, _ y: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {
         var output = ArbitraryPrecisionInteger()
@@ -110,6 +114,7 @@ extension FiniteFieldArithmeticContext {
         return output
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func subtract(_ x: ArbitraryPrecisionInteger, from y: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {
         var output = ArbitraryPrecisionInteger()
@@ -132,6 +137,7 @@ extension FiniteFieldArithmeticContext {
         return output
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func positiveSquareRoot(_ x: ArbitraryPrecisionInteger) throws -> ArbitraryPrecisionInteger {
         let outputPointer = x.withUnsafeBignumPointer { xPointer in

@@ -223,7 +223,7 @@ int DSA_generate_parameters_ex(DSA *dsa, unsigned bits, const uint8_t *seed_in,
   const EVP_MD *evpmd;
 
   evpmd = (bits >= 2048) ? EVP_sha256() : EVP_sha1();
-  qsize = EVP_MD_size(evpmd);
+  qsize = (unsigned int)EVP_MD_size(evpmd);
 
   if (bits < 512) {
     bits = 512;
@@ -838,7 +838,7 @@ int DSA_size(const DSA *dsa) {
   if (ret < value_len) {
     return 0;
   }
-  return ret;
+  return (int)ret;
 }
 
 static int dsa_sign_setup(const DSA *dsa, BN_CTX *ctx, BIGNUM **out_kinv,

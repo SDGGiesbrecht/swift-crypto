@@ -26,10 +26,12 @@ struct ArbitraryPrecisionInteger {
         self._backing = BackingStorage()
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     init(copying original: UnsafePointer<BIGNUM>) throws {
         self._backing = try BackingStorage(copying: original)
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     init(_ original: ArbitraryPrecisionInteger) throws {
         self._backing = try BackingStorage(copying: original._backing)
@@ -52,6 +54,7 @@ extension ArbitraryPrecisionInteger {
             CCryptoBoringSSL_BN_init(&self._backing)
         }
 
+        @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
         init(copying original: UnsafePointer<BIGNUM>) throws {
             self._backing = BIGNUM()
             guard CCryptoBoringSSL_BN_copy(&self._backing, original) != nil else {
@@ -59,6 +62,7 @@ extension ArbitraryPrecisionInteger {
             }
         }
 
+        @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
         init(copying original: BackingStorage) throws {
             self._backing = BIGNUM()
 
@@ -88,12 +92,14 @@ extension ArbitraryPrecisionInteger {
 // MARK: - Extra initializers
 
 extension ArbitraryPrecisionInteger {
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     init<Bytes: ContiguousBytes>(bytes: Bytes) throws {
         self._backing = try BackingStorage(bytes: bytes)
     }
 }
 
 extension ArbitraryPrecisionInteger.BackingStorage {
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     convenience init<Bytes: ContiguousBytes>(bytes: Bytes) throws {
         self.init()
 
@@ -113,6 +119,7 @@ extension ArbitraryPrecisionInteger {
         return try self._backing.withUnsafeBignumPointer(body)
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     mutating func withUnsafeMutableBignumPointer<T>(_ body: (UnsafeMutablePointer<BIGNUM>) throws -> T) rethrows -> T {
         if !isKnownUniquelyReferenced(&self._backing) {
             // Failing to CoW is a fatal error here.
@@ -151,6 +158,7 @@ extension ArbitraryPrecisionInteger {
         }
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func squared() -> ArbitraryPrecisionInteger {
         var result = ArbitraryPrecisionInteger()
@@ -165,6 +173,7 @@ extension ArbitraryPrecisionInteger {
         return result
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     func positiveSquareRoot() throws -> ArbitraryPrecisionInteger {
         var result = ArbitraryPrecisionInteger()
@@ -241,12 +250,15 @@ extension ArbitraryPrecisionInteger: ExpressibleByIntegerLiteral {}
 
 // MARK: - AdditiveArithmetic
 
-extension ArbitraryPrecisionInteger: AdditiveArithmetic {
+@available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+extension ArbitraryPrecisionInteger: AdditiveArithmetic {}
+extension ArbitraryPrecisionInteger {
     @inlinable
     static var zero: ArbitraryPrecisionInteger {
         return 0
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func + (lhs: ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) -> ArbitraryPrecisionInteger {
         var result = ArbitraryPrecisionInteger()
@@ -263,6 +275,7 @@ extension ArbitraryPrecisionInteger: AdditiveArithmetic {
         return result
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func += (lhs: inout ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) {
         let rc = lhs.withUnsafeMutableBignumPointer { lhsPtr in
@@ -273,6 +286,7 @@ extension ArbitraryPrecisionInteger: AdditiveArithmetic {
         precondition(rc == 1, "Unable to allocate memory for new ArbitraryPrecisionInteger")
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func - (lhs: ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) -> ArbitraryPrecisionInteger {
         var result = ArbitraryPrecisionInteger()
@@ -289,6 +303,7 @@ extension ArbitraryPrecisionInteger: AdditiveArithmetic {
         return result
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func -= (lhs: inout ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) {
         let rc = lhs.withUnsafeMutableBignumPointer { lhsPtr in
@@ -302,10 +317,13 @@ extension ArbitraryPrecisionInteger: AdditiveArithmetic {
 
 // MARK: - Numeric
 
-extension ArbitraryPrecisionInteger: Numeric {
+@available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+extension ArbitraryPrecisionInteger: Numeric {}
+extension ArbitraryPrecisionInteger {
     @usableFromInline
     typealias Magnitude = Self
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     var magnitude: Magnitude {
         if self._positive {
@@ -321,6 +339,7 @@ extension ArbitraryPrecisionInteger: Numeric {
         return copy
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func * (lhs: ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) -> ArbitraryPrecisionInteger {
         var result = ArbitraryPrecisionInteger()
@@ -339,6 +358,7 @@ extension ArbitraryPrecisionInteger: Numeric {
         return result
     }
 
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     static func *= (lhs: inout ArbitraryPrecisionInteger, rhs: ArbitraryPrecisionInteger) {
         let rc = lhs.withUnsafeMutableBignumPointer { lhsPtr in
@@ -359,7 +379,10 @@ extension ArbitraryPrecisionInteger: Numeric {
 
 // MARK: - SignedNumeric
 
-extension ArbitraryPrecisionInteger: SignedNumeric {
+@available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
+extension ArbitraryPrecisionInteger: SignedNumeric {}
+extension ArbitraryPrecisionInteger {
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     mutating func negate() {
         let signBit: CInt = self._positive ? 1 : 0
@@ -374,6 +397,7 @@ extension ArbitraryPrecisionInteger: SignedNumeric {
 
 extension Data {
     /// Serializes an ArbitraryPrecisionInteger padded out to a certain minimum size.
+    @available(macOS 10.15, tvOS 13, iOS 13, watchOS 6, *)
     @usableFromInline
     mutating func append(bytesOf integer: ArbitraryPrecisionInteger, paddedToSize paddingSize: Int) throws {
         let byteCount = integer.byteCount

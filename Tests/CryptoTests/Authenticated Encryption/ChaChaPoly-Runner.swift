@@ -23,6 +23,7 @@ import Crypto
 #endif
 
 class ChaChaPolyTests: XCTestCase {
+    @available(tvOS 13, iOS 13, *)
     func testIncorrectKeySize() throws {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!
 
@@ -37,6 +38,7 @@ class ChaChaPolyTests: XCTestCase {
         XCTAssertNoThrow(try ChaChaPoly.open(message, using: key))
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testExtractingBytesFromNonce() throws {
         let nonce = ChaChaPoly.Nonce()
         XCTAssertEqual(Array(nonce), nonce.withUnsafeBytes { Array($0) })
@@ -57,6 +59,7 @@ class ChaChaPolyTests: XCTestCase {
         }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testEncryptDecrypt() throws {
         let plaintext: Data = "Some Super Secret Message".data(using: String.Encoding.utf8)!
 
@@ -69,6 +72,7 @@ class ChaChaPolyTests: XCTestCase {
         XCTAssertEqual(recoveredPlaintext, plaintext)
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testUserConstructedSealedBoxesCombined() throws {
         let ciphertext = Array("This pretty clearly isn't ciphertext, but sure why not".utf8)
         let (contiguousCiphertext, discontiguousCiphertext) = ciphertext.asDataProtocols()
@@ -89,6 +93,7 @@ class ChaChaPolyTests: XCTestCase {
         }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testUserConstructedSealedBoxesSplit() throws {
         let tag = Array(repeating: UInt8(0), count: 16)
         let ciphertext = Array("This pretty clearly isn't ciphertext, but sure why not".utf8)
@@ -130,6 +135,7 @@ class ChaChaPolyTests: XCTestCase {
         XCTAssertEqual(weirdBox.ciphertext, Data())
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testRoundTripDataProtocols() throws {
         func roundTrip<Message: DataProtocol, AAD: DataProtocol>(message: Message, aad: AAD, file: StaticString = (#file), line: UInt = #line) throws {
             let key = SymmetricKey(size: .bits256)
@@ -152,6 +158,7 @@ class ChaChaPolyTests: XCTestCase {
         _ = try orFail { try roundTrip(message: discontiguousMessage, aad: discontiguousAad) }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testWycheproof() throws {
         try orFail {
             try wycheproofTest(
@@ -163,6 +170,7 @@ class ChaChaPolyTests: XCTestCase {
         }
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testGroup(group: AEADTestGroup) throws {
         for testVector in group.tests {
             var msg: Data = Data()

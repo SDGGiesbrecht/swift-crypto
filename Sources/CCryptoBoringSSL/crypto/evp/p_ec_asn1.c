@@ -189,7 +189,7 @@ static int eckey_priv_encode(CBB *out, const EVP_PKEY *key) {
 }
 
 static int int_ec_size(const EVP_PKEY *pkey) {
-  return ECDSA_size(pkey->pkey.ec);
+  return (int)ECDSA_size(pkey->pkey.ec);
 }
 
 static int ec_bits(const EVP_PKEY *pkey) {

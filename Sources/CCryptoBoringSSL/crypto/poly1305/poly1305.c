@@ -309,13 +309,13 @@ void CRYPTO_poly1305_finish(poly1305_state *statep, uint8_t mac[16]) {
   f3 = ((state->h3 >> 18) | (state->h4 << 8)) +
        (uint64_t)U8TO32_LE(&state->key[12]);
 
-  U32TO8_LE(&mac[0], f0);
+  U32TO8_LE(&mac[0], (uint32_t)f0);
   f1 += (f0 >> 32);
-  U32TO8_LE(&mac[4], f1);
+  U32TO8_LE(&mac[4], (uint32_t)f1);
   f2 += (f1 >> 32);
-  U32TO8_LE(&mac[8], f2);
+  U32TO8_LE(&mac[8], (uint32_t)f2);
   f3 += (f2 >> 32);
-  U32TO8_LE(&mac[12], f3);
+  U32TO8_LE(&mac[12], (uint32_t)f3);
 }
 
 #endif  // !BORINGSSL_HAS_UINT128 || !OPENSSL_X86_64

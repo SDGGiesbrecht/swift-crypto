@@ -115,7 +115,7 @@ static int sock_read(BIO *b, char *out, int outl) {
 #if defined(OPENSSL_WINDOWS)
   ret = recv(b->num, out, outl, 0);
 #else
-  ret = read(b->num, out, outl);
+  ret = (int)read(b->num, out, outl);
 #endif
   BIO_clear_retry_flags(b);
   if (ret <= 0) {
@@ -133,7 +133,7 @@ static int sock_write(BIO *b, const char *in, int inl) {
 #if defined(OPENSSL_WINDOWS)
   ret = send(b->num, in, inl, 0);
 #else
-  ret = write(b->num, in, inl);
+  ret = (int)write(b->num, in, inl);
 #endif
   BIO_clear_retry_flags(b);
   if (ret <= 0) {

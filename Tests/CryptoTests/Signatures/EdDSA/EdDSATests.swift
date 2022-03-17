@@ -22,6 +22,7 @@ import Crypto
 #endif
 
 class EdDSATests: XCTestCase {
+    @available(tvOS 13, iOS 13, *)
     func testExample() throws {
         let privateKey = Curve25519.Signing.PrivateKey()
         let publicKey = privateKey.publicKey
@@ -33,6 +34,7 @@ class EdDSATests: XCTestCase {
         XCTAssert(publicKey.isValidSignature(signature, for: someData))
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testSigningDiscontiguousData() throws {
         let privateKey = Curve25519.Signing.PrivateKey()
         let (someContiguousData, someDiscontiguousData) = Array("Some Data".utf8).asDataProtocols()
@@ -51,6 +53,7 @@ class EdDSATests: XCTestCase {
         XCTAssertTrue(privateKey.publicKey.isValidSignature(discontiguousSignature, for: someDiscontiguousData))
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testRejectingInvalidSignaturesOnDiscontiguousData() throws {
         let privateKey = Curve25519.Signing.PrivateKey()
         let otherPrivateKey = Curve25519.Signing.PrivateKey()
@@ -66,6 +69,7 @@ class EdDSATests: XCTestCase {
         XCTAssertFalse(otherPrivateKey.publicKey.isValidSignature(discontiguousSignature, for: someDiscontiguousData))
     }
 
+    @available(tvOS 13, iOS 13, *)
     func testSigningZeroRegionDataProtocol() throws {
         let privateKey = Curve25519.Signing.PrivateKey()
         let signature = try orFail { try privateKey.signature(for: DispatchData.empty) }

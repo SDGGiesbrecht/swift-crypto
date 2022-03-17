@@ -250,7 +250,7 @@ static POLICYINFO *policy_section(X509V3_CTX *ctx,
                 goto err;
             }
             if (!ASN1_STRING_set(qual->d.cpsuri, cnf->value,
-                                 strlen(cnf->value)))
+                                 (int)strlen(cnf->value)))
                 goto merr;
         } else if (!x509v3_name_cmp(cnf->name, "userNotice")) {
             STACK_OF(CONF_VALUE) *unot;
@@ -323,7 +323,7 @@ static POLICYQUALINFO *notice_section(X509V3_CTX *ctx,
             if (not->exptext == NULL)
                 goto merr;
             if (!ASN1_STRING_set(not->exptext, cnf->value,
-                                 strlen(cnf->value)))
+                                 (int)strlen(cnf->value)))
                 goto merr;
         } else if (!strcmp(cnf->name, "organization")) {
             NOTICEREF *nref;
@@ -338,7 +338,7 @@ static POLICYQUALINFO *notice_section(X509V3_CTX *ctx,
             else
                 nref->organization->type = V_ASN1_VISIBLESTRING;
             if (!ASN1_STRING_set(nref->organization, cnf->value,
-                                 strlen(cnf->value)))
+                                 (int)strlen(cnf->value)))
                 goto merr;
         } else if (!strcmp(cnf->name, "noticeNumbers")) {
             NOTICEREF *nref;
