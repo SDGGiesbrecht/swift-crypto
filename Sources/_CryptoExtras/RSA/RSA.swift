@@ -45,6 +45,10 @@ extension _RSA.Signing {
         ///
         /// This constructor supports key sizes of 1024 bits or more. Users should validate that key sizes are appropriate
         /// for their use-case.
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init(pemRepresentation: String) throws {
             self.backing = try BackingPublicKey(pemRepresentation: pemRepresentation)
 
@@ -57,6 +61,10 @@ extension _RSA.Signing {
         ///
         /// This constructor supports key sizes of 1024 bits or more. Users should validate that key sizes are appropriate
         /// for their use-case.
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init<Bytes: DataProtocol>(derRepresentation: Bytes) throws {
             self.backing = try BackingPublicKey(derRepresentation: derRepresentation)
 
@@ -99,6 +107,10 @@ extension _RSA.Signing {
         ///
         /// This constructor supports key sizes of 1024 bits or more. Users should validate that key sizes are appropriate
         /// for their use-case.
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init(pemRepresentation: String) throws {
             self.backing = try BackingPrivateKey(pemRepresentation: pemRepresentation)
 
@@ -111,6 +123,10 @@ extension _RSA.Signing {
         ///
         /// This constructor supports key sizes of 1024 bits or more. Users should validate that key sizes are appropriate
         /// for their use-case.
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init<Bytes: DataProtocol>(derRepresentation: Bytes) throws {
             self.backing = try BackingPrivateKey(derRepresentation: derRepresentation)
 
@@ -123,6 +139,10 @@ extension _RSA.Signing {
         ///
         /// This constructor will refuse to generate keys smaller than 1024 bits. Callers that want to enforce minimum
         /// key size requirements should validate `keySize` before use.
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init(keySize: _RSA.Signing.KeySize) throws {
             guard keySize.bitCount >= 1024 else {
                 throw CryptoKitError.incorrectParameterSize
@@ -204,6 +224,10 @@ extension _RSA.Signing.PrivateKey {
     /// - Parameter digest: The digest to sign.
     /// - Returns: The RSA Signature.
     /// - Throws: If there is a failure producing the signature
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func signature<D: Digest>(for digest: D) throws -> _RSA.Signing.RSASignature {
         return try self.signature(for: digest, padding: .PSS)
     }
@@ -216,6 +240,10 @@ extension _RSA.Signing.PrivateKey {
     /// - Parameter data: The data to sign.
     /// - Returns: The RSA Signature.
     /// - Throws: If there is a failure producing the signature.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func signature<D: DataProtocol>(for data: D) throws -> _RSA.Signing.RSASignature {
         return try self.signature(for: SHA256.hash(data: data), padding: .PSS)
     }
@@ -226,6 +254,10 @@ extension _RSA.Signing.PrivateKey {
     /// - Parameter padding: The padding to use.
     /// - Returns: The RSA Signature.
     /// - Throws: If there is a failure producing the signature
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func signature<D: Digest>(for digest: D, padding: _RSA.Signing.Padding) throws -> _RSA.Signing.RSASignature {
         return try self.backing.signature(for: digest, padding: padding)
     }
@@ -237,6 +269,10 @@ extension _RSA.Signing.PrivateKey {
     /// - Parameter padding: The padding to use.
     /// - Returns: The RSA Signature.
     /// - Throws: If there is a failure producing the signature.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func signature<D: DataProtocol>(for data: D, padding: _RSA.Signing.Padding) throws -> _RSA.Signing.RSASignature {
         return try self.signature(for: SHA256.hash(data: data), padding: padding)
     }
@@ -253,6 +289,10 @@ extension _RSA.Signing.PublicKey {
     ///   - signature: The signature to verify
     ///   - digest: The digest that was signed.
     /// - Returns: True if the signature is valid, false otherwise.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func isValidSignature<D: Digest>(_ signature: _RSA.Signing.RSASignature, for digest: D) -> Bool {
         return self.isValidSignature(signature, for: digest, padding: .PSS)
     }
@@ -266,6 +306,10 @@ extension _RSA.Signing.PublicKey {
     ///   - signature: The signature to verify
     ///   - data: The data that was signed.
     /// - Returns: True if the signature is valid, false otherwise.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func isValidSignature<D: DataProtocol>(_ signature: _RSA.Signing.RSASignature, for data: D) -> Bool {
         return self.isValidSignature(signature, for: SHA256.hash(data: data), padding: .PSS)
     }
@@ -277,6 +321,10 @@ extension _RSA.Signing.PublicKey {
     ///   - digest: The digest that was signed.
     ///   - padding: The padding to use.
     /// - Returns: True if the signature is valid, false otherwise.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func isValidSignature<D: Digest>(_ signature: _RSA.Signing.RSASignature, for digest: D, padding: _RSA.Signing.Padding) -> Bool {
         return self.backing.isValidSignature(signature, for: digest, padding: padding)
     }
@@ -289,6 +337,10 @@ extension _RSA.Signing.PublicKey {
     ///   - data: The data that was signed.
     ///   - padding: The padding to use.
     /// - Returns: True if the signature is valid, false otherwise.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public func isValidSignature<D: DataProtocol>(_ signature: _RSA.Signing.RSASignature, for data: D, padding: _RSA.Signing.Padding) -> Bool {
         return self.isValidSignature(signature, for: SHA256.hash(data: data), padding: padding)
     }

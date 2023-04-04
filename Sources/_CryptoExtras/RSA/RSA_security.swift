@@ -156,6 +156,10 @@ internal struct SecurityRSAPrivateKey {
 }
 
 extension SecurityRSAPrivateKey {
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     internal func signature<D: Digest>(for digest: D, padding: _RSA.Signing.Padding) throws -> _RSA.Signing.RSASignature {
         let algorithm = try SecKeyAlgorithm(digestType: D.self, padding: padding)
         let digestToSign = Data(digest)
@@ -172,6 +176,10 @@ extension SecurityRSAPrivateKey {
  }
 
 extension SecurityRSAPublicKey {
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     func isValidSignature<D: Digest>(_ signature: _RSA.Signing.RSASignature, for digest: D, padding: _RSA.Signing.Padding) -> Bool {
         do {
             let algorithm = try SecKeyAlgorithm(digestType: D.self, padding: padding)
@@ -191,6 +199,10 @@ extension SecurityRSAPublicKey {
 }
 
 extension SecKeyAlgorithm {
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     fileprivate init<D: Digest>(digestType: D.Type = D.self, padding: _RSA.Signing.Padding) throws {
         switch digestType {
         case is Insecure.SHA1.Digest.Type:
@@ -228,6 +240,10 @@ extension SecKeyAlgorithm {
 }
 
 extension Data {
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     init<D: Digest>(_ digest: D) {
         self = digest.withUnsafeBytes { Data($0) }
     }

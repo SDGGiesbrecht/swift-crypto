@@ -58,12 +58,6 @@ if development {
 
 let package = Package(
     name: "swift-crypto",
-    platforms: [
-        .macOS(.v10_15),
-        .iOS(.v13),
-        .watchOS(.v6),
-        .tvOS(.v13),
-    ],
     products: [
         .library(name: "Crypto", targets: ["Crypto"]),
         .library(name: "_CryptoExtras", targets: ["_CryptoExtras"]),

@@ -19,6 +19,10 @@ import Crypto
 import Foundation
 
 /// Types associated with the AES GCM SIV algorithm
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 extension AES.GCM {
     /// AES in GCM SIV mode with 128-bit tags.
     public enum _SIV {
@@ -34,6 +38,9 @@ extension AES.GCM {
         ///   - authenticatedData: Data to authenticate as part of the seal
         /// - Returns: A sealed box returning the authentication tag (seal) and the ciphertext
         /// - Throws: CipherError errors
+        @available(macOS 10.15, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public static func seal<Plaintext: DataProtocol, AuthenticatedData: DataProtocol>
             (_ message: Plaintext, using key: SymmetricKey, nonce: Nonce? = nil, authenticating authenticatedData: AuthenticatedData) throws -> SealedBox {
             return try OpenSSLAESGCMSIVImpl.seal(key: key, message: message, nonce: nonce, authenticatedData: authenticatedData)
@@ -47,6 +54,9 @@ extension AES.GCM {
         ///   - nonce: An Nonce for AES-GCM-SIV encryption. The nonce must be unique for every use of the key to seal data. It can be safely generated with AES.GCM.Nonce()
         /// - Returns: A sealed box returning the authentication tag (seal) and the ciphertext
         /// - Throws: CipherError errors
+        @available(macOS 10.15, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public static func seal<Plaintext: DataProtocol>
             (_ message: Plaintext, using key: SymmetricKey, nonce: Nonce? = nil) throws -> SealedBox {
             return try OpenSSLAESGCMSIVImpl.seal(key: key, message: message, nonce: nonce, authenticatedData: Data?.none)
@@ -61,6 +71,9 @@ extension AES.GCM {
         ///   - authenticatedData:  Data that was authenticated as part of the seal
         /// - Returns: The ciphertext if opening was successful
         /// - Throws: CipherError errors. If the authentication of the sealedbox failed, incorrectTag is thrown.
+        @available(macOS 10.15, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public static func open<AuthenticatedData: DataProtocol>
             (_ sealedBox: SealedBox, using key: SymmetricKey, authenticating authenticatedData: AuthenticatedData) throws -> Data {
             return try OpenSSLAESGCMSIVImpl.open(key: key, sealedBox: sealedBox, authenticatedData: authenticatedData)
@@ -74,17 +87,26 @@ extension AES.GCM {
         ///   - nonce: An Nonce for AES-GCM-SIV encryption. The nonce must be unique for every use of the key to seal data. It can be safely generated with AES.GCM.Nonce().
         /// - Returns: The ciphertext if opening was successful
         /// - Throws: CipherError errors. If the authentication of the sealedbox failed, incorrectTag is thrown.
+        @available(macOS 10.15, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public static func open(_ sealedBox: SealedBox, using key: SymmetricKey) throws -> Data {
             return try OpenSSLAESGCMSIVImpl.open(key: key, sealedBox: sealedBox, authenticatedData: Data?.none)
         }
     }
 }
 
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 extension AES.GCM._SIV {
     public struct Nonce: ContiguousBytes, Sequence {
         let bytes: Data
 
         /// Generates a fresh random Nonce. Unless required by a specification to provide a specific Nonce, this is the recommended initializer.
+        @available(tvOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init() {
             var data = Data(repeating: 0, count: AES.GCM._SIV.nonceByteCount)
             data.withUnsafeMutableBytes {
@@ -94,6 +116,8 @@ extension AES.GCM._SIV {
             self.bytes = data
         }
 
+        @available(tvOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init<D: DataProtocol>(data: D) throws {
             if data.count != AES.GCM._SIV.nonceByteCount {
                 throw CryptoKitError.incorrectParameterSize
@@ -106,6 +130,7 @@ extension AES.GCM._SIV {
             return try self.bytes.withUnsafeBytes(body)
         }
 
+        @available(watchOS 6.0, *)
         public func makeIterator() -> Array<UInt8>.Iterator {
             self.withUnsafeBytes({ (buffPtr) in
                 return Array(buffPtr).makeIterator()
@@ -114,23 +139,37 @@ extension AES.GCM._SIV {
     }
 }
 
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 extension AES.GCM._SIV {
     public struct SealedBox {
         /// The combined representation ( nonce || ciphertext || tag)
         public let combined: Data
         /// The authentication tag
+        @available(watchOS 6.0, *)
         public var tag: Data {
             return combined.suffix(AES.GCM._SIV.tagByteCount)
         }
         /// The ciphertext
+        @available(watchOS 6.0, *)
         public var ciphertext: Data {
             return combined.dropFirst(AES.GCM._SIV.nonceByteCount).dropLast(AES.GCM._SIV.tagByteCount)
         }
         /// The Nonce
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public var nonce: AES.GCM._SIV.Nonce {
             return try! AES.GCM._SIV.Nonce(data: combined.prefix(AES.GCM._SIV.nonceByteCount))
         }
 
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         @inlinable
         public init<D: DataProtocol>(combined: D) throws {
             // AES minimum nonce (12 bytes) + AES tag (16 bytes)
@@ -144,6 +183,10 @@ extension AES.GCM._SIV {
             self.combined = Data(combined)
         }
 
+        @available(macOS 10.15, *)
+        @available(tvOS 13.0, *)
+        @available(iOS 13.0, *)
+        @available(watchOS 6.0, *)
         public init<C: DataProtocol, T: DataProtocol>(nonce: AES.GCM._SIV.Nonce, ciphertext: C, tag: T) throws {
             guard tag.count == AES.GCM._SIV.tagByteCount else {
                 throw CryptoKitError.incorrectParameterSize

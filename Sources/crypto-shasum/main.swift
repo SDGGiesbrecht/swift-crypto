@@ -40,6 +40,10 @@ enum SupportedHashFunction {
         }
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     func hashLoop(from input: FileHandle) -> Data {
         switch self {
         case .sha256:
@@ -53,6 +57,10 @@ enum SupportedHashFunction {
 
     private static let readSize = 8192
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     private static func hashLoop<HF: HashFunction>(from input: FileHandle, with hasher: HF.Type) -> HF.Digest {
         var hasher = HF()
 
@@ -89,6 +97,10 @@ extension String {
 }
 
 
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 func processInputs(_ handles: [String: FileHandle], algorithm: SupportedHashFunction) {
     for (name, fh) in handles {
         let result = algorithm.hashLoop(from: fh)
@@ -96,6 +108,10 @@ func processInputs(_ handles: [String: FileHandle], algorithm: SupportedHashFunc
     }
 }
 
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 func main() {
     var arguments = CommandLine.arguments.dropFirst()
     var algorithm = SupportedHashFunction.sha256  // Default to sha256
@@ -147,4 +163,6 @@ func main() {
 }
 
 
-main()
+if #available(macOS 10.15, tvOS 13.0, iOS 13.0, watchOS 6.0, *) {
+    main()
+}

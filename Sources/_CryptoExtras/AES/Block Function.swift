@@ -18,6 +18,10 @@ import Crypto
 @_implementationOnly import CryptoBoringWrapper
 import Foundation
 
+@available(macOS 10.15, *)
+@available(tvOS 13.0, *)
+@available(iOS 13.0, *)
+@available(watchOS 6.0, *)
 extension AES {
     private static let blockSize = 128 / 8
 
@@ -30,6 +34,10 @@ extension AES {
     /// - parameter payload: The payload to encrypt. Must be exactly 16 bytes long.
     /// - parameter key: The encryption key to use.
     /// - throws: On invalid parameter sizes.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public static func permute<Payload: MutableCollection>(_ payload: inout Payload, key: SymmetricKey) throws where Payload.Element == UInt8 {
         return try Self.permuteBlock(&payload, key: key, permutation: .forward)
     }
@@ -43,10 +51,18 @@ extension AES {
     /// - parameter payload: The payload to decrypt. Must be exactly 16 bytes long.
     /// - parameter key: The decryption key to use.
     /// - throws: On invalid parameter sizes.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     public static func inversePermute<Payload: MutableCollection>(_ payload: inout Payload, key: SymmetricKey) throws where Payload.Element == UInt8 {
         return try Self.permuteBlock(&payload, key: key, permutation: .backward)
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     private static func permuteBlock<Payload: MutableCollection>(_ payload: inout Payload, key: SymmetricKey, permutation: Permutation) throws where Payload.Element == UInt8 {
         if payload.count != Int(Self.blockSize) {
             throw CryptoKitError.incorrectParameterSize
@@ -82,6 +98,10 @@ extension AES {
         case backward
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     private static func permute(_ payload: UnsafeMutableRawBufferPointer, key: SymmetricKey, permutation: Permutation) throws {
         precondition(AES.isValidKey(key))
         precondition(payload.count == Int(Self.blockSize))
@@ -131,6 +151,10 @@ extension AES {
         }
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     private static func isValidKey(_ key: SymmetricKey) -> Bool {
         switch key.bitCount {
         case 128, 192, 256:

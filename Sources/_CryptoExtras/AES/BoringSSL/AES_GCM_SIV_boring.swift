@@ -22,6 +22,10 @@ import Foundation
 
 extension BoringSSLAEAD {
     /// Seal a given message.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     func seal<Plaintext: DataProtocol, Nonce: ContiguousBytes, AuthenticatedData: DataProtocol>(message: Plaintext, key: SymmetricKey, nonce: Nonce, authenticatedData: AuthenticatedData) throws -> (ciphertext: Data, tag: Data) {
         do {
             let context = try AEADContext(cipher: self, key: key)
@@ -32,6 +36,10 @@ extension BoringSSLAEAD {
     }
 
     /// Open a given message.
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     func open<Nonce: ContiguousBytes, AuthenticatedData: DataProtocol>(combinedCiphertextAndTag: Data, key: SymmetricKey, nonce: Nonce, authenticatedData: AuthenticatedData) throws -> Data {
         do {
             let context = try AEADContext(cipher: self, key: key)
@@ -43,6 +51,10 @@ extension BoringSSLAEAD {
 }
 
 enum OpenSSLAESGCMSIVImpl {
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     @inlinable
     static func seal<Plaintext: DataProtocol, AuthenticatedData: DataProtocol>
     (key: SymmetricKey, message: Plaintext, nonce: AES.GCM._SIV.Nonce?, authenticatedData: AuthenticatedData? = nil) throws -> AES.GCM._SIV.SealedBox {
@@ -61,6 +73,10 @@ enum OpenSSLAESGCMSIVImpl {
         return try AES.GCM._SIV.SealedBox(nonce: nonce, ciphertext: ciphertext, tag: tag)
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     @inlinable
     static func open<AuthenticatedData: DataProtocol>
     (key: SymmetricKey, sealedBox: AES.GCM._SIV.SealedBox, authenticatedData: AuthenticatedData? = nil) throws -> Data {
@@ -73,6 +89,10 @@ enum OpenSSLAESGCMSIVImpl {
         }
     }
 
+    @available(macOS 10.15, *)
+    @available(tvOS 13.0, *)
+    @available(iOS 13.0, *)
+    @available(watchOS 6.0, *)
     @usableFromInline
     static func _backingAEAD(key: SymmetricKey) throws -> BoringSSLAEAD {
         switch key.bitCount {
